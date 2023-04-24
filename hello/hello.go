@@ -13,3 +13,7 @@ func SayHello() {
 func SayHelloFromInternalDependency() {
 	internaldependency.InternalDependency()
 }
+
+func SayHelloToConflicts() {
+	fmt.Println("helloc conflicts")
+}

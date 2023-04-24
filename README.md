@@ -41,9 +41,64 @@ Hello from the internal dependency
 ```
 
 - [x] Add changes to the `hello` package in this repo, in [this commit](https://github.com/arnaubennassar/git-subtree-playground-upstream/commit/c9fb994db3f4457d50d7b76a2412cf8c5ad263b1)
+- [x] Fork repo gets upstream modifications, [in this commit](https://github.com/arnaubennassar/git-subtree-playground-fork/commit/6d4493c5ec096429ea0c8b11e93ce796732136a7)
+
+```bash
+# re-create tracking branch
+git branch -D feature/get-hello-package-from-upstram
+git checkout -b feature/get-hello-package-from-upstram upstream-repo/main
+
+# update the separate branch with changes from upstream
+git subtree split -q --squash --prefix=hello --annotate="[upstream repo] " --rejoin -b merging/hello-package
+
+# switch back to main and use subtree merge to update the subdirectory
+git checkout main
+git subtree merge -q --prefix=hello --squash merging/hello-package
+
+# run main.go to ensure it works:
+➜  git-subtree-playground-fork git:(main) go run .
+hello from the fork repo
+BRAND NEW HELLO FUNC, but still... hello
+Hello from the internal dependency
+```
+
+- [x] Upstream modifies `hello`, [in this commit](https://github.com/arnaubennassar/git-subtree-playground-upstream/commit/0e12ea034bb3d9b7e4aed0588abeb477d9d98d7d)
 - [ ] Fork repo gets upstream modifications
   - Get update in a separated branch
-  - PR to main
-- [ ] Fork repo modifies the `hello` package locally
-- [ ] Fork repo get upstreram changes
+  - [PR to main](https://github.com/arnaubennassar/git-subtree-playground-fork/pull/1)
+
+```bash
+# create update branch
+git checkout -b feature/update-upstream
+
+# re-create tracking branch
+git branch -D feature/get-hello-package-from-upstram
+git checkout -b feature/get-hello-package-from-upstram upstream-repo/main
+
+
+# update the separate branch with changes from upstream
+git subtree split -q --squash --prefix=hello --annotate="[upstream repo] " --rejoin -b merging/hello-package
+
+# switch back to feature/update-upstream and use subtree merge to update the subdirectory
+git checkout feature/update-upstream
+git subtree merge -q --prefix=hello --squash merging/hello-package
+
+# push changes
+git push --set-upstream origin feature/update-upstream
+
+# Open PR, approve and merge on GH
+
+# switch back to main and use subtree merge to update the subdirectory
+git checkout main
+git pull
+
+# run main.go to ensure it works:
+➜  git-subtree-playground-fork git:(main) go run .
+hello from the fork repo
+Simple... hello
+Hello from the internal dependency
+```
+
+- [x] Fork repo modifies the `hello` package locally in [this commit](https://github.com/arnaubennassar/git-subtree-playground-fork/commit/6ed73f251133dab55fa7b0c70229d6ae4ce939d8)
+- [ ] This repo makes changes to `hello` that will create conflict later on, in [this commit]()
 - [ ] Fork repo modifies the `hello` package and creates a PR to this repo to contribute
