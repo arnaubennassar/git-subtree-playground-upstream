@@ -44,6 +44,8 @@ Hello from the internal dependency
 - [x] Fork repo gets upstream modifications, [in this commit](https://github.com/arnaubennassar/git-subtree-playground-fork/commit/6d4493c5ec096429ea0c8b11e93ce796732136a7)
 
 ```bash
+git fetch --all
+
 # re-create tracking branch
 git branch -D feature/get-hello-package-from-upstram
 git checkout -b feature/get-hello-package-from-upstram upstream-repo/main
@@ -63,11 +65,11 @@ Hello from the internal dependency
 ```
 
 - [x] Upstream modifies `hello`, [in this commit](https://github.com/arnaubennassar/git-subtree-playground-upstream/commit/0e12ea034bb3d9b7e4aed0588abeb477d9d98d7d)
-- [ ] Fork repo gets upstream modifications
-  - Get update in a separated branch
-  - [PR to main](https://github.com/arnaubennassar/git-subtree-playground-fork/pull/1)
+- [x] Fork repo gets upstream modifications, in a separated branch so we can do a [PR to main](https://github.com/arnaubennassar/git-subtree-playground-fork/pull/1)
 
 ```bash
+git fetch --all
+
 # create update branch
 git checkout -b feature/update-upstream
 
@@ -100,5 +102,25 @@ Hello from the internal dependency
 ```
 
 - [x] Fork repo modifies the `hello` package locally in [this commit](https://github.com/arnaubennassar/git-subtree-playground-fork/commit/6ed73f251133dab55fa7b0c70229d6ae4ce939d8)
-- [ ] This repo makes changes to `hello` that will create conflict later on, in [this commit]()
-- [ ] Fork repo modifies the `hello` package and creates a PR to this repo to contribute
+- [x] This repo makes changes to `hello` that will create conflict later on, in [this commit](https://github.com/arnaubennassar/git-subtree-playground-upstream/commit/b7c1013544c60314563758983324ddd05eaf7412)
+- [x] Fork repo get changes from upstream as explained before, but needs to fix conflicts. [PR to main](https://github.com/arnaubennassar/git-subtree-playground-fork/pull/2)
+- [ ] Fork repo creates a [PR](https://github.com/arnaubennassar/git-subtree-playground-upstream/pull/1) to the upstream with the changes made in the previous step
+
+```bash
+git fetch --all
+
+# create branch from main of the upstream repo
+git checkout -b feature/push-to-upstream upstream-repo/main
+
+# get changes from the fork main branch of the hello package
+git checkout --patch main hello
+
+# fix deps with go get
+go get
+
+# push changes
+git add .
+git commit -m "Contribute to upstream"
+git push upstream-repo HEAD
+# in the upstream repo create a PR from the branch with the same name (feature/push-to-upstream)
+```
