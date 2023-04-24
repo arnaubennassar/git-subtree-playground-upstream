@@ -104,7 +104,7 @@ Hello from the internal dependency
 - [x] Fork repo modifies the `hello` package locally in [this commit](https://github.com/arnaubennassar/git-subtree-playground-fork/commit/6ed73f251133dab55fa7b0c70229d6ae4ce939d8)
 - [x] This repo makes changes to `hello` that will create conflict later on, in [this commit](https://github.com/arnaubennassar/git-subtree-playground-upstream/commit/b7c1013544c60314563758983324ddd05eaf7412)
 - [x] Fork repo get changes from upstream as explained before, but needs to fix conflicts. [PR to main](https://github.com/arnaubennassar/git-subtree-playground-fork/pull/2)
-- [ ] Fork repo creates a [PR](https://github.com/arnaubennassar/git-subtree-playground-upstream/pull/1) to the upstream with the changes made in the previous step
+- [x] Fork repo creates a [PR](https://github.com/arnaubennassar/git-subtree-playground-upstream/pull/1) to the upstream with the changes made in the previous step
 
 ```bash
 git fetch --all
