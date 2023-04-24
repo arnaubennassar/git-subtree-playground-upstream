@@ -9,4 +9,5 @@ func main() {
 	hello.SayHello()
 	world.World()
 	hello.SayHelloFromInternalDependency()
+	hello.SayHelloFromForkDep()
 }
