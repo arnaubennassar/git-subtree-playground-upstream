@@ -7,7 +7,7 @@ import (
 )
 
 func SayHello() {
-	fmt.Println("BRAND NEW HELLO FUNC, but still... hello")
+	fmt.Println("Simple... hello")
 }
 
 func SayHelloFromInternalDependency() {
